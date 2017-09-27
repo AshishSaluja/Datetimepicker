@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Datepicker - Default functionality</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="datepicker.css" rel="stylesheet" type="text/css">
+    <script src="datepicker.js"></script>
+</head>
+<style>
+    .container {
+        margin: 10px auto;
+        border: 1px solid #e4e4e4;
+        padding: 15px 10px 0px 10px;
+        border-radius: 6px;
+    }
+    .lbl_text {
+        margin-top: 5px;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+
+            <div class='col-sm-3'>
+                <div class="col-sm-3"><label class="lbl_text">From</label></div>
+                <div class="form-group" id="sandbox-container">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-sm-3'>
+                <div class="col-sm-3"><label class="lbl_text">To</label></div>
+                <div class="form-group" id="sandbox-container">
+                    <div class='input-group date' id='datetimepicker2'>
+                        <input type='text' class="form-control" id="sandbox-container" />
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-sm-4'>
+                <div class="col-sm-3"><label class="lbl_text">Product</label></div>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <select class="form-control" id="sel1">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                    <option>Option 6</option>
+                  </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class='col-sm-2'>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-block">Submit</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <script>
+        $('#sandbox-container input').datepicker({
+            autoclose: true
+        });
+        $('#sandbox-container input').on('show', function(e) {
+            if (e.date) {
+                $(this).data('stickyDate', e.date);
+            } else {
+                $(this).data('stickyDate', null);
+            }
+        });
+        $('#sandbox-container input').on('hide', function(e) {
+            var stickyDate = $(this).data('stickyDate');
+
+            if (!e.date && stickyDate) {
+                $(this).datepicker('setDate', stickyDate);
+                $(this).data('stickyDate', null);
+            }
+        });
+        /* $('#sandbox-container .glyphicon-calendar').datepicker({
+            autoclose: true
+        });
+        $('#sandbox-container .glyphicon-calendar').on('show', function(e) {
+            //console.log(e);
+            if (e.date) {
+                console.log(this);
+                $(this).data('stickyDate', e.date);
+            } else {
+                $(this).data('stickyDate', null);
+            }
+        });
+        $('#sandbox-container .glyphicon-calendar').on('hide', function(e) {
+            var stickyDate = $(this).data('stickyDate');
+            if (!e.date && stickyDate) {
+                $(this).datepicker('setDate', stickyDate);
+                $(this).data('stickyDate', null);
+            }
+        }); */
+    </script>
+</body>
+
+</html>
